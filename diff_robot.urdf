@@ -1,0 +1,228 @@
+<robot name="diff_robot">
+    <link name="base_link">  
+    </link>
+    <joint name="base_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="frame_link"/>
+        <origin xyz="-0.1 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    </joint>
+    <link name="frame_link">
+        <visual>
+            <geometry>
+                <box size="0.37 0.16 0.14"/> <!--  khung xe  0.4 0.3 0.15 -> 0.4 0.16 0.1     -->
+            </geometry>
+            <origin xyz="0.2 0.0 0.05" rpy="0.0 0.0 0.0"/> <!-- trong tam 0.2 0.0 0.075  ->   0.1 0.0 0.05  -->
+            <material name="white">
+                <color rgba="1.0 0.0 0.0 1.0"/>
+            </material>
+        </visual>
+        <inertial>
+            <mass value="6.0"/>
+            <origin xyz="0.2 0.0 0.05"/>    <!--  trong tam xe     -->
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.37 0.16 0.14"/> <!--    khung xe  0.4 0.3 0.15 -> 0.2 0.16 0.15   -->
+            </geometry>
+            <origin xyz="0.2 0.0 0.05" rpy="0.0 0.0 0.0"/> <!-- trong tam 0.2 0.0 0.075  ->   0.1 0.0 0.05  -->
+        </collision>
+    </link>
+    <joint name="left_wheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="left_wheel_link"/>
+        <origin xyz="0.0 0.08 0.0" rpy="-1.57 0.0 0.0"/> <!--.0.17->0.08...khoang cach banh xe toi trong tam...-->
+        <axis xyz="0.0 0.0 1.0"/>   
+    </joint>
+    <link name="left_wheel_link">
+        <visual>
+            <geometry>
+                <cylinder radius="0.06" length="0.03"/>
+            </geometry>
+            <origin xyz="0.0 0.0 0.0" rpy="0 0.0 0.0"/>
+            <material name="blue">
+                <color rgba="0.0 0.0 1.0 1.0"/>
+            </material>
+        </visual>
+        <inertial>
+            <mass value="1.0"/>
+            <origin xyz="0.0 0.0 0.0"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <!--   <box size="0.4 0.05 0.15"/>   -->
+                <cylinder radius="0.06" length="0.03"/>   <!--   kich thuoc banh xe   -->
+            </geometry>
+            <origin xyz="0.0 0.0 0.0" rpy="0 0.0 0.0"/>
+        </collision>
+    </link>
+    <joint name="right_wheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="right_wheel_link"/>
+        <origin xyz="0.0 -0.08 0.0" rpy="1.57 0.0 0.0"/> <!--. -0.17 -> -0.08...khoang cach banh xe toi trong tam..-->
+        <axis xyz="0.0 0.0 1.0"/>   
+    </joint>
+    <link name="right_wheel_link">  
+        <visual>
+            <geometry>
+                <cylinder radius="0.06" length="0.03"/>
+            </geometry>
+            <origin xyz="0.0 0.0 0.0" rpy="0 0.0 0.0"/>
+            <material name="blue">
+                <color rgba="0.0 0.0 1.0 1.0"/>
+            </material>
+        </visual>
+        <inertial>
+            <mass value="1.0"/>
+            <origin xyz="0.0 0.0 0.0"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <cylinder radius="0.06" length="0.03"/> <!--kich thuoc banh xe-->
+            </geometry>
+            <origin xyz="0.0 0.0 0.0" rpy="0 0.0 0.0"/>   
+        </collision>
+    </link>
+    <joint name="caster_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="caster_link"/>
+        <origin xyz="0.22 0.0 0.0"/>        <!--chinh vi tri banh mat trau-->   
+    </joint>
+    <link name="caster_link">
+        <visual>
+            <geometry>
+                <sphere radius="0.06"/>  <!--kich thuoc banh xe-->
+            </geometry>
+            <origin xyz="0.0 0.0 0.0"/>
+            <material name="yellow">
+                <color rgba="1.0 1.0 0.0 1.0"/>
+            </material>
+        </visual>
+        <inertial>
+            <mass value="1e-9"/>
+            <origin xyz="0.0 0.0 0.0"/>
+            <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <sphere radius="0.06"/>   <!--banh xe tren duonng-->
+            </geometry>
+            <origin xyz="0.0 0.0 0.0"/>
+        </collision>
+    </link>
+
+    <link name="camera_link">
+        <visual>
+            <geometry>
+                <box size="0.08 0.1 0.06"/>   <!--kich thuoc cam -->
+            </geometry>
+            <origin xyz="0.0 0.0 0.0"/>
+            <material name="Purple">
+                <color rgba="1.0 0.0 1.0 1.0"/>
+            </material>
+        </visual>
+        <inertial>
+            <mass value="1e-1" />
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.08 0.1 0.06"/><!--kich thuoc cam-->
+            </geometry>
+            <origin xyz="0.0 0.0 0.0"/>
+        </collision>
+    </link>
+    <joint name="camera_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="camera_link"/>
+        <origin xyz="0.28 0.0 0.13" rpy="0.0 0.26 0.0"/> <!-- distance cammera-khungxe 0.28 0.0 0.19 -> 0.28 0.0 0.13 -->
+    </joint>
+
+    <gazebo reference="frame_link">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+    <gazebo reference="left_wheel_link">
+        <material>Gazebo/Yellow</material>
+    </gazebo>
+    <gazebo reference="right_wheel_link">
+        <material>Gazebo/Yellow</material>
+    </gazebo>
+    <gazebo reference="caster_link">
+        <material>Gazebo/Yellow</material>
+    </gazebo>
+    <!-- camera -->
+    <gazebo reference="camera_link">
+        <material>Gazebo/Purple</material>
+        <sensor type="camera" name="camera1">
+        <update_rate>30.0</update_rate>
+        <camera name="head">
+            <horizontal_fov>1.3962634</horizontal_fov>
+            <image>
+                <width>800</width>
+                <height>800</height>
+                <format>R8G8B8</format>
+            </image>
+            <clip>
+                <near>0.02</near>
+                <far>300</far>
+            </clip>
+            <noise>
+            <type>gaussian</type>
+                <!-- Noise is sampled independently per pixel on each frame.
+                    That pixel's noise value is added to each of its color
+                    channels, which at that point lie in the range [0,1]. -->
+                <mean>0.0</mean>
+                <stddev>0.007</stddev>
+            </noise>
+        </camera>
+        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+            <alwaysOn>true</alwaysOn>
+            <updateRate>0.0</updateRate>
+            <cameraName>my_robot/camera1</cameraName>
+            <imageTopicName>image_raw</imageTopicName>
+            <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+            <frameName>camera_link</frameName>
+            <hackBaseline>0.07</hackBaseline>
+            <distortionK1>0.0</distortionK1>
+            <distortionK2>0.0</distortionK2>
+            <distortionK3>0.0</distortionK3>
+            <distortionT1>0.0</distortionT1>
+            <distortionT2>0.0</distortionT2>
+        </plugin>
+        </sensor>
+    </gazebo>
+
+
+     <transmission name="left_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_wheel_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor1">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="right_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_wheel_joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor2">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/my_diffbot</robotNamespace>
+        </plugin>
+    </gazebo>
+
+</robot>

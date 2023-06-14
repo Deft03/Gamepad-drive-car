@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<launch>
+
+
+    <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find my_robot_gazebo)/worlds/maze1.world"/> <!-- Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
+        <arg name="paused" value="false"/>
+        <arg name="use_sim_time" value="true"/>
+        <arg name="gui" value="true"/>
+        <arg name="recording" value="false"/>
+        <arg name="debug" value="false"/>
+    </include>
+    <!-- Load urdf file -->
+    <param name="robot_description" textfile="$(find my_robot_gazebo)/urdf/diff_robot.urdf" />
+    <!-- Robot pose -->
+    <arg name="x_pos" default="0.6"/> <!--  5.5  red -->
+    <arg name="y_pos" default="-1.75"/> <!--   -2  green -->
+    <arg name="z_pos" default="0"/>
+    <arg name="roll" default="0"/>
+    <arg name="pitch" default="0"/>
+    <arg name="yaw" default="0.0"/> <!--1.57 goc quay-->
+    <!-- Spawn a robot into Gazebo -->
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model myrobot -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos)
+              -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)" />
+
+    <include file="$(find gbot_gazebo_1)/launch/gbot_control.launch">
+        <!--arg name="model" value="$(arg model)" /-->
+    </include>
+
+</launch>
