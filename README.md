@@ -1,0 +1,1 @@
+This project involves designing a gamepad to control a robot in a Gazebo environment. The gamepad offers two modes of control: button mode and gesture mode. In button mode, the robot is controlled by pressing buttons on the gamepad. In gesture mode, the robot is controlled by moving your hand, with data being collected from an acceleration sensor.
